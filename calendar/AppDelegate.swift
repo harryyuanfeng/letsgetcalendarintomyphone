@@ -7,6 +7,8 @@
 //
 
 import Cocoa
+import EventKit
+
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -16,6 +18,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        //CalendarPermissionsManager.sharedInstance.getPermissions();
+        var store = EKEventStore()
+        
+        store.requestAccess(to: .event, completion: {
+            (success, error) -> Void in
+            print("Got permission = \(success); error = \(error)")
+        });
+        LiftCalendar.init().loadCalendars();
+        LiftCalendar.init().getNextEvent();
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
