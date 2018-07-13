@@ -22,11 +22,13 @@ class LiftCalendar {
     
     func getNextEvent() -> EKEvent? {
         let calendar = Calendar.current
-        let date = calendar.date(byAdding: .minute, value: -5, to: Date())
-        print(date);
+        let date = calendar.date(byAdding: .minute, value: +5, to: Date())
         print(getUpcomingEvents().first?.title);
-        print((getUpcomingEvents().first?.startDate)!);
-        print(Date());
+//        print(date);
+//        
+//        print(getUpcomingEvents().first?.startDate);
+//        print(getUpcomingEvents().first?.startDate == date);
+//        print(Date());
         return getUpcomingEvents().first
     }
     
