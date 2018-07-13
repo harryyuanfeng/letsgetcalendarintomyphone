@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
     var lcaldaar: LiftCalendar!;
-    var event : EKEvent! = nil;
+    var events : [EKEvent]! = nil;
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         //CalendarPermissionsManager.sharedInstance.getPermissions();
@@ -36,14 +36,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // must be internal or public.
     @objc func update() {
         // Something cool
-        event = self.lcaldaar.getNextEvent()!;
+        events = self.lcaldaar.getUpcomingEvents();
         let now = Date();
-        let eventDate = event.startDate as Date;
-        print(now);
-        print(eventDate);
-        let difference = eventDate.timeIntervalSince(now);
-        print(difference);
-        print(difference < 300 && difference > 293);
+        for event in events {
+            let eventDate = event.startDate as Date;
+            let difference = eventDate.timeIntervalSince(now);
+            print(event.title);
+            print(difference);
+            print(difference < 300 && difference > 293);
+        }
     }
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
